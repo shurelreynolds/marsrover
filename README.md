@@ -9,4 +9,5 @@ Test Plan
 Aspects to be tested
 - Plateau valid & invalid size limits
 - Valid & invalid commands
+- Navigation Map
 - Location
