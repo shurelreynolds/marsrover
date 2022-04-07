@@ -7,6 +7,6 @@ import java.awt.*;
  */
 public interface Sample {
     String getName();
-    public Point getLocation();
-    public void setLocation(Point location) ;
+    Point getLocation();
+    void setLocation(Point location) ;
 }
