@@ -1,4 +1,8 @@
 package com.shurel.marsrover;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Shurel Reynolds.
  */
@@ -12,9 +16,14 @@ public class Plateau {
      * */
     private final int gridYSize;
 
+    private final List<Navigable> navigableList = new ArrayList<>();
 
     public Plateau(int gridXSize, int gridYSize) {
         this.gridXSize = gridXSize;
         this.gridYSize = gridYSize;
+    }
+    //add navigable object to plateau
+    public void addNavigable(Navigable navigable){
+        navigableList.add(navigable);
     }
 }
