@@ -11,10 +11,9 @@ interface Lever extends Equipment,Navigable{}
 abstract class AbstractLever implements Lever{}
 class RobotArm extends AbstractLever{}
 class Rover extends AbstractVehicle{}
-interface Grid{}
-abstract class AbstractGrid implements Grid{}
+class Grid{}
 
-class Plateau extends AbstractGrid{}
+class Plateau{}
 interface Equipment{}
 class AbstractEquipment implements Equipment{}
 
