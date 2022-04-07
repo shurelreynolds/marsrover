@@ -4,6 +4,7 @@ package com.shurel.marsrover;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Navigator {
@@ -37,6 +38,9 @@ public class Navigator {
      * */
     private final Plateau plateau;
 
+    private char[][] grid;
+
+
     /*
      * Creates a new Navigator object with the given grid sizes.
      * @param gridXSize sets the number of grids along the x-axis
@@ -53,5 +57,27 @@ public class Navigator {
         if (gridXSize < MIN_GRID_COUNT || gridYSize < MIN_GRID_COUNT)
             throw new NavigatorException("Minimum Grid Size: " + MIN_GRID_COUNT);
          plateau = new Plateau(gridXSize, gridYSize);
+        grid = new char[gridXSize][gridYSize];
+         //fill the grid
+        for (char i[] : grid) {
+            // Fill each row with -.
+            Arrays.fill(i, '.');
+        }
     }
+
+    /*
+    * @return a text representation of the map
+    * */
+    public String getTextMap(){
+
+            String out = "";
+            for (char i[] : grid) {
+                for (char j : i) {
+                    out += j;
+                }
+                out += "\n";
+
+            }
+            return out.trim();
+        }
 }
