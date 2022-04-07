@@ -7,6 +7,8 @@ import java.awt.*;
  */
 public abstract class AbstractLever implements Lever {
 
+    protected int degrees;
+
     @Override
     public boolean move(int x, int y) {
         return false;
@@ -25,5 +27,13 @@ public abstract class AbstractLever implements Lever {
         return ' ';
     }
 
+    @Override
+    public int getDegrees() {
+        return 0;
+    }
 
+    @Override
+    public void setDegrees(int degrees) {
+this.degrees=degrees;
+    }
 }

@@ -9,6 +9,7 @@ public abstract class AbstractVehicle implements Vehicle {
     protected Camera camera;
     protected final String name;
     protected Point location;
+    protected int degrees;
 
     public AbstractVehicle(String name) {
         this.name=name;
@@ -46,5 +47,15 @@ public abstract class AbstractVehicle implements Vehicle {
     @Override
     public Point getLocation() {
         return location;
+    }
+
+    @Override
+    public int getDegrees() {
+        return 0;
+    }
+
+    @Override
+    public void setDegrees(int degrees) {
+
     }
 }

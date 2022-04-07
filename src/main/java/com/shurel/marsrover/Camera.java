@@ -6,6 +6,17 @@ import java.awt.*;
  * @author Shurel Reynolds.
  */
 public class Camera extends AbstractEquipment implements Navigable {
+protected int degrees;
+
+    @Override
+    public int getDegrees() {
+        return 0;
+    }
+
+    @Override
+    public void setDegrees(int degrees) {
+this.degrees=degrees;
+    }
 
     @Override
     public boolean move(int x, int y) {
