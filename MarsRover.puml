@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+abstract class AbstractVehicle implements Vehicle{
+}
+interface Vehicle extends Navigable{
+}
+
+class Robot extends AbstractVehicle{
+}
+interface Lever extends Equipment,Navigable{}
+abstract class AbstractLever implements Lever{}
+class RobotArm extends AbstractLever{}
+class Rover extends AbstractVehicle{}
+interface Grid{}
+abstract class AbstractGrid implements Grid{}
+
+class Plateau extends AbstractGrid{}
+interface Equipment{}
+class AbstractEquipment implements Equipment{}
+
+class Camera extends AbstractEquipment implements Navigable{}
+interface Sample{}
+abstract class AbstractSample implements Sample{}
+class Rock extends AbstractSample{
+}
+class Water extends AbstractSample{
+}
+class Ice extends AbstractSample{
+}
+interface Navigable{}
+
+class Navigator{
+}
+
+
+Robot -- RobotArm :1
+
+interface Planet{}
+abstract class AbstractPlanet{}
+
+class Earth extends AbstractPlanet{}
+class Mars extends AbstractPlanet{}
+
+@enduml
