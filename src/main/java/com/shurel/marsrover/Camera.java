@@ -18,7 +18,7 @@ public class Camera extends AbstractEquipment implements Navigable {
     }
 
     @Override
-    public Point getCoordinate() {
+    public Point getLocation() {
         return null;
     }
 

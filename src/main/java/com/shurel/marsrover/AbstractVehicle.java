@@ -7,6 +7,12 @@ import java.awt.*;
 
 public abstract class AbstractVehicle implements Vehicle {
     protected Camera camera;
+    protected final String name;
+    protected Point location;
+
+    public AbstractVehicle(String name) {
+        this.name=name;
+    }
 
     @Override
     public void setCamera(Camera camera) {
@@ -24,7 +30,7 @@ public abstract class AbstractVehicle implements Vehicle {
     }
 
     public String getName() {
-        return this.getClass().getName();
+        return this.name==null?this.getClass().getName():this.name;
     }
 
     @Override
@@ -33,13 +39,12 @@ public abstract class AbstractVehicle implements Vehicle {
     }
 
     @Override
-    public Point getCoordinate() {
-        return null;
-    }
-
-    @Override
     public char getFacingDirection() {
         return ' ';
     }
 
+    @Override
+    public Point getLocation() {
+        return location;
+    }
 }

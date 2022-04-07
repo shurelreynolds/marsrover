@@ -4,5 +4,8 @@ package com.shurel.marsrover;
  */
 public class Robot extends AbstractVehicle {
 
+    public Robot(String name){
+        super(name);
+    }
 
 }

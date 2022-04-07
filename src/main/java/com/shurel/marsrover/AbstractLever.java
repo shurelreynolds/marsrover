@@ -16,7 +16,7 @@ public abstract class AbstractLever implements Lever {
         return false;
     }
     @Override
-    public Point getCoordinate() {
+    public Point getLocation() {
         return null;
     }
 
@@ -24,5 +24,6 @@ public abstract class AbstractLever implements Lever {
     public char getFacingDirection() {
         return ' ';
     }
+
 
 }

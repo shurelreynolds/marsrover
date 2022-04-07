@@ -9,7 +9,7 @@ public interface Navigable{
     boolean move(int x, int y);
     String getName();
     boolean rotate(char dir);
-    Point getCoordinate();
+    Point getLocation();
     char getFacingDirection();
 }
 

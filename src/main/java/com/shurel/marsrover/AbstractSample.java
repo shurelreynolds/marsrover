@@ -7,9 +7,19 @@ import java.awt.*;
  */
 public abstract class AbstractSample implements Sample {
     protected Point location;
-    public String getName(){
+
+    public AbstractSample(Point location) {
+        this.location = location;
+    }
+
+    public AbstractSample(String name, Point location) {
+        this(location);
+    }
+
+    public String getName() {
         return this.getClass().getName();
     }
+
     public Point getLocation() {
 
         return location;

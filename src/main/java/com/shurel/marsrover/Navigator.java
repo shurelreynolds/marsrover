@@ -29,7 +29,7 @@ public class Navigator {
      * Assigns one Rover to the navigable map
      * */
     static {
-        Rover rover = new Rover();
+        Rover rover = new Rover("Rover 1");
         roverList.add(rover);
     }
 
