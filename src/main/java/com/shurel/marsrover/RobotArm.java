@@ -4,8 +4,10 @@ package com.shurel.marsrover;
  */
 public class RobotArm extends AbstractLever {
 
+
     public String getName(){
         return this.getClass().getName();
     }
+
 
 }

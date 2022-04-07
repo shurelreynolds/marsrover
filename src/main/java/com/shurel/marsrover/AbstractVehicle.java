@@ -1,12 +1,16 @@
 package com.shurel.marsrover;
+
+import java.awt.*;
 /**
  * @author Shurel Reynolds.
  */
+
 public abstract class AbstractVehicle implements Vehicle {
-protected Camera camera;
+    protected Camera camera;
+
     @Override
     public void setCamera(Camera camera) {
-        this.camera=camera;
+        this.camera = camera;
     }
 
     @Override
@@ -16,14 +20,26 @@ protected Camera camera;
 
     @Override
     public boolean rotate(char dir) {
-      return false;
+        return false;
     }
 
-    public String getName(){
+    public String getName() {
         return this.getClass().getName();
     }
+
     @Override
     public boolean move(int x, int y) {
         return false;
     }
+
+    @Override
+    public Point getCoordinate() {
+        return null;
+    }
+
+    @Override
+    public char getFacingDirection() {
+        return ' ';
+    }
+
 }
