@@ -1,11 +1,21 @@
 package com.shurel.marsrover;
+
+import java.awt.*;
+
 /**
  * @author Shurel Reynolds.
  */
 public abstract class AbstractSample implements Sample {
-
+    protected Point location;
     public String getName(){
         return this.getClass().getName();
     }
+    public Point getLocation() {
 
+        return location;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
+    }
 }
