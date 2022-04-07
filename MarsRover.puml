@@ -26,6 +26,7 @@ class Water extends AbstractSample{
 }
 class Ice extends AbstractSample{
 }
+class CollectedSample extends AbstractSample{}
 interface Navigable{}
 
 class Navigator{
