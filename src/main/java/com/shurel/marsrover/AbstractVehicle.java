@@ -12,6 +12,7 @@ public abstract class AbstractVehicle implements Vehicle {
     //initial position
     protected Point location = new Point(0, 0);
     protected int degrees;
+    protected char facingDirection;
 
     public AbstractVehicle(String name) {
         this.name = name;
@@ -43,7 +44,8 @@ public abstract class AbstractVehicle implements Vehicle {
 
     @Override
     public char getFacingDirection() {
-        return ' ';
+
+        return facingDirection;
     }
 
     @Override

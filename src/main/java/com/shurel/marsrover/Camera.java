@@ -43,5 +43,9 @@ this.degrees=degrees;
         return getLocation().x+" "+getLocation().y+" "+getFacingDirection();
     }
 
+    @Override
+    public void setPoint(int x, int y) {
+    }
+
 
 }

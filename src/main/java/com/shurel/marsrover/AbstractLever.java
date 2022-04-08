@@ -26,7 +26,10 @@ public abstract class AbstractLever implements Lever {
     public char getFacingDirection() {
         return ' ';
     }
-
+    @Override
+    public String getInitial() {
+        return getName().charAt(0) + "" + getName().charAt(getName().length() - 1);
+    }
     @Override
     public int getDegrees() {
         return 0;

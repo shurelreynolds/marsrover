@@ -15,6 +15,11 @@ public class RobotArm extends AbstractLever {
         return this.getClass().getName();
     }
 
+    @Override
+    public void setPoint(int x, int y) {
+
+    }
+
     //TOD: document method - collect sample
     public void collect(Sample sample, Point location) {
         collectedSample.add(sample);

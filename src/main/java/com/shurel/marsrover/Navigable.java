@@ -10,10 +10,12 @@ public interface Navigable{
     void setDegrees(int degrees);
     boolean move(int x, int y);
     String getName();
+    String getInitial();
     boolean rotate(char dir);
     Point getLocation();
     char getFacingDirection();
     String getCoordinates();
+    void setPoint(int x, int y);
 }
 
 

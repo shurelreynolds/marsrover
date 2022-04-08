@@ -20,28 +20,30 @@ public class Navigator {
      * */
     public final static int MIN_GRID_COUNT = 5;
 
-    /*
-     * Stores a map of Navigable objects by Name
-     * */
-    private static List<Rover> roverList = new ArrayList<>();
+
+
+
+
+    private static void position(Navigable navigable, int x, int y) {
+        navigable.setPoint(x,y);
+    }
 
     /*
-     * Assigns one Rover to the navigable map
+     * The Planet to navigate
      * */
-    static {
-        Rover rover = new Rover("Rover 1");
-        roverList.add(rover);
-    }
-    /*
-    * The Planet to navigate
-    * */
     private final Planet planet;
 
     /*
-    * for plotting out coords
-    * */
-    private char[][] grid;
+     * for plotting out coords
+     * */
+    private String[][] grid;
 
+    /*
+     * creates a constructor with the default minimum grid size
+     * */
+    public Navigator() throws NavigatorException {
+        this(MIN_GRID_COUNT, MIN_GRID_COUNT);
+    }
 
     /*
      * Creates a new Navigator object with the given grid sizes.
@@ -58,32 +60,46 @@ public class Navigator {
 
         if (gridXSize < MIN_GRID_COUNT || gridYSize < MIN_GRID_COUNT)
             throw new NavigatorException("Minimum Grid Size: " + MIN_GRID_COUNT);
-        planet=new Mars(new Plateau(gridXSize, gridYSize));
-        grid = new char[gridXSize][gridYSize];
-         //fill the grid
-        for (char i[] : grid) {
+        planet = new Mars(new Plateau(gridXSize, gridYSize));
+        grid = new String[gridXSize][gridYSize];
+        //fill the grid
+        for (String i[] : grid) {
             // Fill each row with -.
-            Arrays.fill(i, '.');
+            Arrays.fill(i, " . ");
         }
+        //position the first rover on grid
+        Navigable rover=planet.getPlateau().getNavigable("Rover 1");
+
+        grid[(gridYSize-1)-rover.getLocation().y][rover.getLocation().x]=" "+rover.getInitial();
     }
 
     /*
-    * @return a text representation of the map
-    * */
-    public String getTextMap(){
+     * @return a text representation of the map
+     * */
+    public String getTextMap() {
+// map out
 
-            String out = "";
-            for (char i[] : grid) {
-                for (char j : i) {
-                    out += j;
-                }
-                out += "\n";
 
+
+        String out = "";
+        for (String i[] : grid) {
+            for (String j : i) {
+                out += j;
             }
-            return out.trim();
+            out += "\n";
+
         }
 
+
+
+        return out;
+    }
+
     public void move(String navigable, int x, int y) {
-        planet.getPlateau().getNavigable(navigable).move(x,y);
+        planet.getPlateau().getNavigable(navigable).move(x, y);
+    }
+
+    public void printMap() {
+        System.out.println(getTextMap());
     }
 }
