@@ -32,12 +32,14 @@ public class Navigator {
         Rover rover = new Rover("Rover 1");
         roverList.add(rover);
     }
+    /*
+    * The Planet to navigate
+    * */
+    private final Planet planet;
 
     /*
-     * Defines the plateau where this navigator operates
-     * */
-    private final Plateau plateau;
-
+    * for plotting out coords
+    * */
     private char[][] grid;
 
 
@@ -56,7 +58,7 @@ public class Navigator {
 
         if (gridXSize < MIN_GRID_COUNT || gridYSize < MIN_GRID_COUNT)
             throw new NavigatorException("Minimum Grid Size: " + MIN_GRID_COUNT);
-         plateau = new Plateau(gridXSize, gridYSize);
+        planet=new Mars(new Plateau(gridXSize, gridYSize));
         grid = new char[gridXSize][gridYSize];
          //fill the grid
         for (char i[] : grid) {
@@ -82,6 +84,6 @@ public class Navigator {
         }
 
     public void move(String navigable, int x, int y) {
-        plateau.getNavigable(navigable).move(x,y);
+        planet.getPlateau().getNavigable(navigable).move(x,y);
     }
 }

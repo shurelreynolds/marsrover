@@ -4,4 +4,5 @@ package com.shurel.marsrover;
  */
 public interface Planet {
     String getName();
+    Plateau getPlateau();
 }
