@@ -17,7 +17,17 @@ public class Plateau {
      * */
     private final int gridYSize;
 
-    private final List<Navigable> navigableList = new ArrayList<>();
+    private static final List<Navigable> navigableList = new ArrayList<>();
+
+    /*
+     * Assigns one Rover to the navigable map
+     * */
+    static {
+        Rover rover = new Rover("Rover 1");
+        navigableList.add(rover);
+
+    }
+
 
     public Plateau(int gridXSize, int gridYSize) {
         this.gridXSize = gridXSize;
@@ -29,6 +39,7 @@ public class Plateau {
     }
 
     public Navigable getNavigable(String name) {
-        return null;
+
+        return navigableList.stream().filter(n->n.getName().equals(name)).findFirst().get();
     }
 }

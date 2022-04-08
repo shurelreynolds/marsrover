@@ -9,6 +9,6 @@ public class Mars extends AbstractPlanet {
 
     @Override
     public Plateau getPlateau() {
-        return null;
+        return plateau;
     }
 }
