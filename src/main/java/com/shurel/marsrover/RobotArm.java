@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class RobotArm extends AbstractLever {
     //samples collected
-    private List<Sample> collectedSample = new ArrayList<>();
+    private final List<Sample> collectedSample = new ArrayList<>();
 
     public String getName() {
         return this.getClass().getName();

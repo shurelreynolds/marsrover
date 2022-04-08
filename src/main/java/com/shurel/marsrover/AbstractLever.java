@@ -36,4 +36,9 @@ public abstract class AbstractLever implements Lever {
     public void setDegrees(int degrees) {
 this.degrees=degrees;
     }
+
+    @Override
+    public String getCoordinates() {
+        return getLocation().x+" "+getLocation().y+" "+getFacingDirection();
+    }
 }

@@ -38,5 +38,10 @@ this.degrees=degrees;
         return ' ';
     }
 
+    @Override
+    public String getCoordinates() {
+        return getLocation().x+" "+getLocation().y+" "+getFacingDirection();
+    }
+
 
 }

@@ -13,6 +13,7 @@ public interface Navigable{
     boolean rotate(char dir);
     Point getLocation();
     char getFacingDirection();
+    String getCoordinates();
 }
 
 

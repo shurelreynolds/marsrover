@@ -8,5 +8,4 @@ public class AbstractEquipment implements Equipment {
         return this.getClass().getName();
     }
 
-
 }

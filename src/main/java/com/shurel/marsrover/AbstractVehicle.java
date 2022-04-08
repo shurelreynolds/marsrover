@@ -1,6 +1,7 @@
 package com.shurel.marsrover;
 
 import java.awt.*;
+
 /**
  * @author Shurel Reynolds.
  */
@@ -8,11 +9,12 @@ import java.awt.*;
 public abstract class AbstractVehicle implements Vehicle {
     protected Camera camera;
     protected final String name;
-    protected Point location;
+    //initial position
+    protected Point location = new Point(0, 0);
     protected int degrees;
 
     public AbstractVehicle(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -31,7 +33,7 @@ public abstract class AbstractVehicle implements Vehicle {
     }
 
     public String getName() {
-        return this.name==null?this.getClass().getName():this.name;
+        return this.name == null ? this.getClass().getName() : this.name;
     }
 
     @Override
@@ -47,6 +49,11 @@ public abstract class AbstractVehicle implements Vehicle {
     @Override
     public Point getLocation() {
         return location;
+    }
+
+    @Override
+    public String getCoordinates() {
+        return getLocation().x + " " + getLocation().y + " " + getFacingDirection();
     }
 
     @Override

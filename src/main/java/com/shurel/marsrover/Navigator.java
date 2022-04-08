@@ -80,4 +80,8 @@ public class Navigator {
             }
             return out.trim();
         }
+
+    public void move(String navigable, int x, int y) {
+        plateau.getNavigable(navigable).move(x,y);
+    }
 }

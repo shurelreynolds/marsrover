@@ -1,5 +1,6 @@
 package com.shurel.marsrover;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,5 +26,9 @@ public class Plateau {
     //add navigable object to plateau
     public void addNavigable(Navigable navigable){
         navigableList.add(navigable);
+    }
+
+    public Navigable getNavigable(String name) {
+        return null;
     }
 }

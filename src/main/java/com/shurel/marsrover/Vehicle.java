@@ -9,4 +9,5 @@ public interface Vehicle extends Navigable {
     void setCamera(Camera camera);
     Camera getCamera();
     Point getLocation();
+
 }
