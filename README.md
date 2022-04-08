@@ -3,7 +3,7 @@ MarsRover is a simulation game about navigating space vehicles, avoiding obstacl
 
 Assumption
 - That there is a Rover at point 0,0 at the start, facing North.
-
+- On Move R2(x=R(-1).x,R(-1).y)
 
 Test Plan
 
