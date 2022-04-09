@@ -28,4 +28,5 @@ public abstract class AbstractSample implements Sample {
     public void setLocation(Point location) {
         this.location = location;
     }
+
 }

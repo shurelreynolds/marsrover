@@ -38,8 +38,14 @@ public class Plateau {
         navigableList.add(navigable);
     }
 
-    public Navigable getNavigable(String name) {
+    public Navigable getNavigable(String name) throws NavigatorCommandException{
+     Navigable navigable =
+       navigableList.stream().filter(n->n.getName().equals(name)).findFirst().get();
+    if(navigable==null)throw new NavigatorCommandException(name +" not found");
+    return navigable;
+    }
 
-        return navigableList.stream().filter(n->n.getName().equals(name)).findFirst().get();
+    public int getGridYSize() {
+        return this.gridYSize;
     }
 }

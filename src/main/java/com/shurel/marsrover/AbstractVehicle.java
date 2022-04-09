@@ -1,6 +1,8 @@
 package com.shurel.marsrover;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Shurel Reynolds.
@@ -11,8 +13,9 @@ public abstract class AbstractVehicle implements Vehicle {
     protected final String name;
     //initial position
     protected Point location = new Point(0, 0);
-    protected int degrees;
-    protected char facingDirection;
+    protected int degrees = 90;
+    protected char facingDirection = 'N';
+    protected List<History> history = new ArrayList<>();
 
     public AbstractVehicle(String name) {
         this.name = name;
@@ -66,5 +69,20 @@ public abstract class AbstractVehicle implements Vehicle {
     @Override
     public void setDegrees(int degrees) {
 
+    }
+
+    @Override
+    public List<History> getHistory() {
+        return history;
+    }
+
+    @Override
+    public void setFacingDirection(char facingDirection) {
+        this.facingDirection = facingDirection;
+    }
+
+    @Override
+    public void setPoint(int x, int y) {
+        location = new Point(x, y);
     }
 }

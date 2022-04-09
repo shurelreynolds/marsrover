@@ -7,7 +7,8 @@ import java.awt.*;
  */
 public abstract class AbstractLever implements Lever {
 
-    protected int degrees;
+    protected int degrees=90;
+    protected char facingDirection;
 
     @Override
     public boolean move(int x, int y) {
@@ -32,7 +33,7 @@ public abstract class AbstractLever implements Lever {
     }
     @Override
     public int getDegrees() {
-        return 0;
+        return degrees;
     }
 
     @Override
@@ -44,4 +45,11 @@ this.degrees=degrees;
     public String getCoordinates() {
         return getLocation().x+" "+getLocation().y+" "+getFacingDirection();
     }
+
+    @Override
+    public void setFacingDirection(char facingDirection) {
+        this.facingDirection = facingDirection;
+    }
+
+
 }

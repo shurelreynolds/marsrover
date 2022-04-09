@@ -8,6 +8,9 @@ import java.awt.*;
 public interface Navigable{
     int getDegrees();
     void setDegrees(int degrees);
+    /* Adds to the x,y value of the location
+    * @return true if the change was made
+    * */
     boolean move(int x, int y);
     String getName();
     String getInitial();
@@ -16,6 +19,7 @@ public interface Navigable{
     char getFacingDirection();
     String getCoordinates();
     void setPoint(int x, int y);
+    void setFacingDirection(char dir);
 }
 
 
