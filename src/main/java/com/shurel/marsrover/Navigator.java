@@ -4,9 +4,7 @@ package com.shurel.marsrover;
  */
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Navigator {
     /*
@@ -22,11 +20,8 @@ public class Navigator {
     public final static int MIN_GRID_COUNT = 5;
 
 
-
-
-
     private static void position(Navigable navigable, int x, int y) {
-        navigable.setPoint(x,y);
+        navigable.setPoint(x, y);
     }
 
     /*
@@ -44,6 +39,7 @@ public class Navigator {
      * */
     public Navigator() throws NavigatorException, NavigatorCommandException {
         this(MIN_GRID_COUNT, MIN_GRID_COUNT);
+        move("Rover 1", 0, 0);
     }
 
     /*
@@ -69,9 +65,8 @@ public class Navigator {
             Arrays.fill(i, " . ");
         }
         //position the first rover on grid
-        Navigable rover=planet.getPlateau().getNavigable("Rover 1");
-
-        grid[(gridYSize-1)-rover.getLocation().y][rover.getLocation().x]=" "+rover.getInitial();
+        Navigable rover = planet.getPlateau().getNavigable("Rover 1");
+        grid[(gridYSize - 1) - rover.getLocation().y][rover.getLocation().x] = " " + rover.getInitial();
     }
 
     /*
@@ -79,7 +74,6 @@ public class Navigator {
      * */
     public String getTextMap() {
 // map out
-
 
 
         String out = "";
@@ -92,12 +86,12 @@ public class Navigator {
         }
 
 
-
         return out;
     }
 
     public void move(String navigable, int x, int y) throws NavigatorCommandException {
-        planet.getPlateau().getNavigable(navigable).move(x, y);
+        // planet.getPlateau().getNavigable(navigable).move(x, y);
+        move(navigable, x + " " + y + " N");
     }
 
     public void printMap() {
@@ -108,36 +102,62 @@ public class Navigator {
         return planet.getPlateau().getNavigable(navigatable).getCoordinates();
     }
 
-    public void parseCommand(String input) throws NavigatorCommandException{
-    if(input==null) new NavigatorCommandException("Input is null");
+    public void parseCommand(String input) throws NavigatorCommandException {
+        if (input == null) new NavigatorCommandException("Input is null");
     }
 
-    public void move(String navigable, String command)  throws NavigatorCommandException{
-          //find navigable first
-        if(navigable==null) new NavigatorCommandException("Navigable is null");
-        Navigable nav= planet.getPlateau().getNavigable(navigable);
+    public void move(String navigable, String command) throws NavigatorCommandException {
+        //find navigable first
+        if (navigable == null) new NavigatorCommandException("Navigable is null");
+        Navigable nav = planet.getPlateau().getNavigable(navigable);
 
-        if(command.matches("\\d+ \\d+ [NEWS]")){
-            String s[]=command.split(" ");
-            int x=Integer.parseInt(s[0]);
-            int y=Integer.parseInt(s[1]);
-            char dir=command.charAt(command.length()-1);
+        if (command.matches("\\-?\\d+ \\-?\\d+ [NEWS]")) {
+            String s[] = command.split(" ");
+            int x = Integer.parseInt(s[0]);
+            int y = Integer.parseInt(s[1]);
+
+            if (x >= planet.getPlateau().getGridXSize())
+                throw new NavigatorCommandException("x is out of bounds");
+
+            if (y >= planet.getPlateau().getGridYSize())
+                throw new NavigatorCommandException("y is out of bounds");
+
+            if (x <= -planet.getPlateau().getGridXSize())
+                throw new NavigatorCommandException("x is out of bounds");
+
+            if (y <= -planet.getPlateau().getGridYSize())
+                throw new NavigatorCommandException("y is out of bounds");
+
+            if (x < 0)
+                x += planet.getPlateau().getGridXSize();
+            if (y < 0)
+                y += planet.getPlateau().getGridYSize();
+
+
+            char dir = command.charAt(command.length() - 1);
+
 
             //remove from grid
-            Point location=nav.getLocation();
-            grid[(planet.getPlateau().getGridYSize()-1)-location.y][location.x]=" . ";
+            Point location = nav.getLocation();
 
-            nav.setPoint(x,y);
-nav.setFacingDirection(dir);
 
-// places new position on grid
-            location=nav.getLocation();
-            grid[(planet.getPlateau().getGridYSize()-1)-location.y][location.x]=nav.getInitial()+" ";
+            grid[(planet.getPlateau().getGridYSize() - 1) - location.y][location.x] = " . ";
+
+            nav.setPoint(x, y);
+            nav.setFacingDirection(dir);
+
+            // places new position on grid
+            location = nav.getLocation();
+            grid[(planet.getPlateau().getGridYSize() - 1) - location.y][location.x] = nav.getInitial() + " ";
 
         }
-}
+    }
 
     public Navigable find(String navigable) throws NavigatorCommandException {
-       return planet.getPlateau().getNavigable(navigable);
+        return planet.getPlateau().getNavigable(navigable);
+    }
+
+    public Planet getPlanet() {
+        return this.planet;
     }
 }

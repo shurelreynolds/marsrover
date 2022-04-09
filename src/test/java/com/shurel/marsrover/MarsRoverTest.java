@@ -4,6 +4,9 @@ package com.shurel.marsrover;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.awt.*;
 
@@ -28,10 +31,31 @@ public class MarsRoverTest {
         int gridYSize = 10;
         try {
             navigator = new Navigator(gridXSize, gridYSize);
-        } catch (NavigatorException|NavigatorCommandException e) {
+            assertEquals("Mars", navigator.getPlanet().getName());
+        } catch (NavigatorException | NavigatorCommandException e) {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testRoverOnMap() {
+
+        try {
+            Navigator navigator = new Navigator();
+
+
+            String expected = " .  .  .  .  . \n" +
+                    " .  .  .  .  . \n" +
+                    " .  .  .  .  . \n" +
+                    " .  .  .  .  . \n" +
+                    "R1  .  .  .  . \n";
+            assertEquals(expected, navigator.getTextMap());
+        } catch (NavigatorException | NavigatorCommandException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Test
     public void testMinimumInitGridSize() {
@@ -44,6 +68,7 @@ public class MarsRoverTest {
         Assertions.assertEquals("Minimum Grid Size: " + MIN_GRID_COUNT, exception.getMessage());
     }
 
+
     @Test
     public void testMaximumInitGridSize() {
         gridXSize = 10;
@@ -51,58 +76,61 @@ public class MarsRoverTest {
 
         NavigatorException exception = Assertions.assertThrows(NavigatorException.class, () -> {
             navigator = new Navigator(gridXSize, gridYSize);
-
         });
 
         Assertions.assertEquals("Maximum Grid Size: " + MAX_GRID_COUNT, exception.getMessage());
 
-
     }
 
 
-
-        @Test
-        public void testRoverOnMap(){
-
-            try {
-                navigator = new Navigator();
-            } catch (NavigatorException|NavigatorCommandException e) {
-                e.printStackTrace();
-            }
-               String expected=" .  .  .  .  . \n" +
-                 " .  .  .  .  . \n" +
-                 " .  .  .  .  . \n" +
-                 " .  .  .  .  . \n" +
-                 " R1 .  .  .  . \n";
-            assertEquals(expected, navigator.getTextMap());
-            try {
-                System.out.println(navigator.getCoordinates("Rover 1"));
-            } catch (NavigatorCommandException e) {
-                e.printStackTrace();
-            }
-
-        }
-
     @Test
-    public void testMoveRover(){
+    public void testMoveRover() {
         try {
             navigator = new Navigator();
-            navigator.move("Rover 1","1 2 N");
-            Navigable rover=navigator.find("Rover 1");
-            assertEquals(new Point(1,2),rover.getLocation());
-            assertEquals('N',rover.getFacingDirection());
+            navigator.move("Rover 1", "1 2 N");
+            Navigable rover = navigator.find("Rover 1");
+            assertEquals(new Point(1, 2), rover.getLocation());
+            assertEquals('N', rover.getFacingDirection());
 
-            String expected=" .  .  .  .  . \n" +
+            String expected = " .  .  .  .  . \n" +
                     " .  .  .  .  . \n" +
                     " . R1  .  .  . \n" +
                     " .  .  .  .  . \n" +
                     " .  .  .  .  . \n";
 
-            assertEquals(expected,navigator.getTextMap());
+            assertEquals(expected, navigator.getTextMap());
 
-        } catch (NavigatorCommandException|NavigatorException e) {
+        } catch (NavigatorCommandException | NavigatorException e) {
             e.printStackTrace();
         }
 
     }
+
+    @Order(6)
+    @Test
+    public void testMoveNegativeNumbersRover() {
+        try {
+            navigator = new Navigator();
+            navigator.move("Rover 1", "-1 -1 N");
+            Navigable rover = navigator.find("Rover 1");
+
+            assertEquals(new Point(4, 4), rover.getLocation());
+            assertEquals('N', rover.getFacingDirection());
+
+            String expected =
+                    " .  .  .  . R1 \n" +
+                    " .  .  .  .  . \n" +
+                    " .  .  .  .  . \n" +
+                    " .  .  .  .  . \n" +
+                    " .  .  .  .  . \n";
+
+            assertEquals(expected, navigator.getTextMap());
+
+        } catch (NavigatorCommandException | NavigatorException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }

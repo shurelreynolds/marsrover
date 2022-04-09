@@ -5,7 +5,10 @@ package com.shurel.marsrover;
 public class Mars extends AbstractPlanet {
     protected Mars(Plateau plateau) {
         super(plateau);
+        setName("Mars");
     }
+
+
 
     @Override
     public Plateau getPlateau() {

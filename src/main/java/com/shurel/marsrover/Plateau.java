@@ -48,4 +48,8 @@ public class Plateau {
     public int getGridYSize() {
         return this.gridYSize;
     }
+
+    public int getGridXSize() {
+        return this.gridXSize;
+    }
 }

@@ -1,5 +1,7 @@
 package com.shurel.marsrover;
 
+import java.util.List;
+
 /**
  * @author Shurel Reynolds.
  */
@@ -13,8 +15,9 @@ public class Rover extends AbstractVehicle {
         return getName().charAt(0) + "" + getName().charAt(getName().length() - 1);
     }
 
-    @Override
-    public void setPoint(int x, int y) {
 
-    }
+
+
+
+
 }
