@@ -3,6 +3,7 @@ package com.shurel.marsrover;
  * @author Shurel Reynolds.
  */
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +42,7 @@ public class Navigator {
     /*
      * creates a constructor with the default minimum grid size
      * */
-    public Navigator() throws NavigatorException {
+    public Navigator() throws NavigatorException, NavigatorCommandException {
         this(MIN_GRID_COUNT, MIN_GRID_COUNT);
     }
 
@@ -54,7 +55,7 @@ public class Navigator {
      * @exception NavigatorException if the grid size for y is too small
      * @exception NavigatorException if the grid size for y is too large
      * */
-    public Navigator(int gridXSize, int gridYSize) throws NavigatorException {
+    public Navigator(int gridXSize, int gridYSize) throws NavigatorException, NavigatorCommandException {
         if (gridXSize > MAX_GRID_COUNT || gridYSize > MAX_GRID_COUNT)
             throw new NavigatorException("Maximum Grid Size: " + MAX_GRID_COUNT);
 
@@ -95,11 +96,48 @@ public class Navigator {
         return out;
     }
 
-    public void move(String navigable, int x, int y) {
+    public void move(String navigable, int x, int y) throws NavigatorCommandException {
         planet.getPlateau().getNavigable(navigable).move(x, y);
     }
 
     public void printMap() {
         System.out.println(getTextMap());
+    }
+
+    public String getCoordinates(String navigatable) throws NavigatorCommandException {
+        return planet.getPlateau().getNavigable(navigatable).getCoordinates();
+    }
+
+    public void parseCommand(String input) throws NavigatorCommandException{
+    if(input==null) new NavigatorCommandException("Input is null");
+    }
+
+    public void move(String navigable, String command)  throws NavigatorCommandException{
+          //find navigable first
+        if(navigable==null) new NavigatorCommandException("Navigable is null");
+        Navigable nav= planet.getPlateau().getNavigable(navigable);
+
+        if(command.matches("\\d+ \\d+ [NEWS]")){
+            String s[]=command.split(" ");
+            int x=Integer.parseInt(s[0]);
+            int y=Integer.parseInt(s[1]);
+            char dir=command.charAt(command.length()-1);
+
+            //remove from grid
+            Point location=nav.getLocation();
+            grid[(planet.getPlateau().getGridYSize()-1)-location.y][location.x]=" . ";
+
+            nav.setPoint(x,y);
+nav.setFacingDirection(dir);
+
+// places new position on grid
+            location=nav.getLocation();
+            grid[(planet.getPlateau().getGridYSize()-1)-location.y][location.x]=nav.getInitial()+" ";
+
+        }
+}
+
+    public Navigable find(String navigable) throws NavigatorCommandException {
+       return planet.getPlateau().getNavigable(navigable);
     }
 }
