@@ -130,7 +130,6 @@ public class MarsRoverTest {
 
 
     @Test
-
     public void testInvalidCommands() {
         NavigatorCommandException exception = Assertions.assertThrows(NavigatorCommandException.class, () -> {
             Navigator.isValidCommand(null);
@@ -153,5 +152,69 @@ public class MarsRoverTest {
 
 
     }
+
+    @Test
+    public void testBasicCommands() {
+        boolean error=false;
+        Navigator navigator=null;
+        try {
+         navigator=new Navigator(5,5);
+         //default rover coord = 0 0 N
+         Navigable rover=navigator.find("Rover 1");
+         assertEquals("0 0 N",rover.getCoordinates());
+
+         //move rover North 1 place
+           navigator.move("Rover 1","M");
+           assertEquals("0 1 N",rover.getCoordinates());
+//turn right
+            navigator.move("Rover 1","RM");
+            assertEquals("1 1 E",rover.getCoordinates());
+//position to 1 2 N
+            navigator.move("Rover 1","1 2 N");
+            assertEquals("1 2 N",rover.getCoordinates());
+
+            //chained of command
+            //navigator.move("Rover 1","LMLMLMLMM");
+            //navigator.move("Rover 1","LMLMLMLMM");
+            navigator.move("Rover 1","L");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","M");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","L");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","M");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+
+            navigator.move("Rover 1","L");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","M");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","L");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","M");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","L");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","M");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+            navigator.move("Rover 1","M");
+            System.out.println(navigator.find("Rover 1").getCoordinates());
+
+
+            //  navigator.move("Rover 1","L");
+           // navigator.move("Rover 1","L");
+           // navigator.move("Rover 1","L");
+           // navigator.move("Rover 1","L");
+           // navigator.move("Rover 1","L");
+            // assertEquals("3 3 E",rover.getCoordinates());
+           // assertEquals("3 3 E",rover.getCoordinates());
+
+
+        } catch (NavigatorException|NavigatorCommandException e) {
+            error=true;
+            e.printStackTrace();
+        }
+    }
+
 
 }

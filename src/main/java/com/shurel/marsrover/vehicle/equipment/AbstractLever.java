@@ -1,4 +1,6 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.vehicle.equipment;
+
+import com.shurel.marsrover.Navigable;
 
 import java.awt.*;
 
@@ -40,7 +42,7 @@ this.degrees=degrees;
 
     @Override
     public String getCoordinates() {
-        return getLocation().x+" "+getLocation().y+" "+Navigable.toCoord(degrees);
+        return getLocation().x+" "+getLocation().y+" "+ Navigable.toCoord(degrees);
     }
 
 

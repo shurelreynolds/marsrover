@@ -1,4 +1,4 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.planet;
 
 /**
  * @author Shurel Reynolds.

@@ -1,4 +1,4 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.vehicle.equipment;
 /**
  * @author Shurel Reynolds.
  */

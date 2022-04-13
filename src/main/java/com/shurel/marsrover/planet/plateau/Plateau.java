@@ -1,4 +1,8 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.planet.plateau;
+
+import com.shurel.marsrover.Navigable;
+import com.shurel.marsrover.NavigatorCommandException;
+import com.shurel.marsrover.vehicle.Rover;
 
 import java.awt.*;
 import java.util.ArrayList;

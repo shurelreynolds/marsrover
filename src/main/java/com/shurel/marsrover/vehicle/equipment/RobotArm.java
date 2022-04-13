@@ -1,4 +1,6 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.vehicle.equipment;
+
+import com.shurel.marsrover.sample.Sample;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -3,6 +3,10 @@ package com.shurel.marsrover;
  * @author Shurel Reynolds.
  */
 
+import com.shurel.marsrover.planet.Mars;
+import com.shurel.marsrover.planet.Planet;
+import com.shurel.marsrover.planet.Plateau;
+
 import java.awt.*;
 import java.util.Arrays;
 
@@ -98,7 +102,7 @@ public class Navigator {
         return planet.getPlateau().getNavigable(navigatable).getCoordinates();
     }
 
-    Point parseLocation(Navigable navigable, String command) {
+    Point parseLocation(Navigable navigable, char command) {
         Point currentLocation = navigable.getLocation();
         int degrees = navigable.getDegrees();
 
@@ -106,16 +110,23 @@ public class Navigator {
         int y = currentLocation.y;
         char current = ' ';
         int deg = degrees;
+        //System.out.println("Current deg: "+deg);
         //LMLMLMLMM
-        for (int i = 0; i < command.length(); i++) {
-            current = command.charAt(i);
 
-            switch (current) {
+            deg=navigable.getDegrees();
+
+            System.out.println("Command: "+current);
+            switch (command) {
                 case 'L':
+
                     deg = deg == 0 ? 270 : deg - 90;
+                    navigable.setDegrees(deg);
+                   // System.out.println("update l: "+deg);
                     break;
                 case 'R':
                     deg = deg == 270 ? 0 : deg + 90;
+                    navigable.setDegrees(deg);
+
                     break;
 
                 case 'M':
@@ -141,14 +152,10 @@ public class Navigator {
                     }
 
 
-            }
-
 
         }
 
-        navigable.setDegrees(deg);
-
-        if (x < 0)
+         if (x < 0)
             x += planet.getPlateau().getGridXSize();
         if (y < 0)
             y += planet.getPlateau().getGridYSize();
@@ -205,7 +212,10 @@ public class Navigator {
         Point location = nav.getLocation();
 
         if (command.matches("[LMR]+")) {
-            updateLocation(nav, parseLocation(nav, command));
+            //update position
+            for (int i = 0; i < command.length(); i++) {
+                updateLocation(nav, parseLocation(nav, command.charAt(i)));
+            }
         } else if (command.matches("\\-?\\d+ \\-?\\d+ [NEWS]")) {
 
             String s[] = command.split(" ");

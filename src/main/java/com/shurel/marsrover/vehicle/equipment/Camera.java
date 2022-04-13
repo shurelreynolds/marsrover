@@ -1,4 +1,6 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.vehicle.equipment;
+
+import com.shurel.marsrover.Navigable;
 
 import java.awt.*;
 

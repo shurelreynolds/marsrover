@@ -1,4 +1,8 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.vehicle;
+
+import com.shurel.marsrover.History;
+import com.shurel.marsrover.Navigable;
+import com.shurel.marsrover.vehicle.equipment.Camera;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,4 +1,7 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.vehicle;
+
+import com.shurel.marsrover.vehicle.equipment.RobotArm;
+
 /**
  * @author Shurel Reynolds.
  */

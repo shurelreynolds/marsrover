@@ -1,4 +1,4 @@
-package com.shurel.marsrover;
+package com.shurel.marsrover.sample;
 
 import java.awt.*;
 
