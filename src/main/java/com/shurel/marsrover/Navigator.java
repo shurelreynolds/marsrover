@@ -5,7 +5,7 @@ package com.shurel.marsrover;
 
 import com.shurel.marsrover.planet.Mars;
 import com.shurel.marsrover.planet.Planet;
-import com.shurel.marsrover.planet.Plateau;
+import com.shurel.marsrover.planet.plateau.Plateau;
 
 import java.awt.*;
 import java.util.Arrays;
