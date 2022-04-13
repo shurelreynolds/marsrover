@@ -4,9 +4,6 @@ package com.shurel.marsrover;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.TestMethodOrder;
 
 import java.awt.*;
 
@@ -90,7 +87,7 @@ public class MarsRoverTest {
             navigator.move("Rover 1", "1 2 N");
             Navigable rover = navigator.find("Rover 1");
             assertEquals(new Point(1, 2), rover.getLocation());
-            assertEquals('N', rover.getFacingDirection());
+            assertEquals('N', Navigable.toCoord(rover.getDegrees()));
 
             String expected = " .  .  .  .  . \n" +
                     " .  .  .  .  . \n" +
@@ -106,7 +103,7 @@ public class MarsRoverTest {
 
     }
 
-    @Order(6)
+
     @Test
     public void testMoveNegativeNumbersRover() {
         try {
@@ -115,14 +112,13 @@ public class MarsRoverTest {
             Navigable rover = navigator.find("Rover 1");
 
             assertEquals(new Point(4, 4), rover.getLocation());
-            assertEquals('N', rover.getFacingDirection());
 
             String expected =
                     " .  .  .  . R1 \n" +
-                    " .  .  .  .  . \n" +
-                    " .  .  .  .  . \n" +
-                    " .  .  .  .  . \n" +
-                    " .  .  .  .  . \n";
+                            " .  .  .  .  . \n" +
+                            " .  .  .  .  . \n" +
+                            " .  .  .  .  . \n" +
+                            " .  .  .  .  . \n";
 
             assertEquals(expected, navigator.getTextMap());
 
@@ -132,5 +128,30 @@ public class MarsRoverTest {
 
     }
 
+
+    @Test
+
+    public void testInvalidCommands() {
+        NavigatorCommandException exception = Assertions.assertThrows(NavigatorCommandException.class, () -> {
+            Navigator.isValidCommand(null);
+
+        });
+        Assertions.assertEquals("Command is null", exception.getMessage());
+
+        exception = Assertions.assertThrows(NavigatorCommandException.class, () -> {
+            Navigator.isValidCommand("3");
+
+        });
+
+        Assertions.assertEquals("Invalid Format", exception.getMessage());
+        exception = Assertions.assertThrows(NavigatorCommandException.class, () -> {
+            Navigator.isValidCommand("KGFDHRT");
+
+        });
+
+        Assertions.assertEquals("Invalid Format", exception.getMessage());
+
+
+    }
 
 }
