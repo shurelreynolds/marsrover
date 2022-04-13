@@ -16,10 +16,24 @@ public interface Navigable{
     String getInitial();
     boolean rotate(char dir);
     Point getLocation();
-    char getFacingDirection();
     String getCoordinates();
     void setPoint(int x, int y);
-    void setFacingDirection(char dir);
+
+    static char toCoord(int degree){
+        switch(degree){
+            case 0:
+                return 'W';
+            case 90:
+                return 'N';
+            case 180:
+                return 'E';
+            case 270:
+                return 'S';
+
+        }
+        return ' ';
+    }
+
 }
 
 

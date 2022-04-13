@@ -6,8 +6,10 @@ import java.awt.*;
  * @author Shurel Reynolds.
  */
 public class Camera extends AbstractEquipment implements Navigable {
+    /*
+     * represents face turning 0 - W, 90 - N, 180 - E 270 -S
+     * */
     protected int degrees;
-    protected int facingDirection;
 
     @Override
     public int getDegrees() {
@@ -35,23 +37,12 @@ public class Camera extends AbstractEquipment implements Navigable {
     }
 
     @Override
-    public char getFacingDirection() {
-        return ' ';
-    }
-
-    @Override
     public String getCoordinates() {
-        return getLocation().x + " " + getLocation().y + " " + getFacingDirection();
+        return getLocation().x + " " + getLocation().y + " " + Navigable.toCoord(degrees);
     }
 
     @Override
     public void setPoint(int x, int y) {
     }
-
-    @Override
-    public void setFacingDirection(char facingDirection) {
-        this.facingDirection = facingDirection;
-    }
-
 
 }
