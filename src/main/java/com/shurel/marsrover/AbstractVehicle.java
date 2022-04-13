@@ -13,6 +13,9 @@ public abstract class AbstractVehicle implements Vehicle {
     protected final String name;
     //initial position
     protected Point location = new Point(0, 0);
+    /*
+     * represents face turning 0 - W, 90 - N, 180 - E 270 -S
+     * */
     protected int degrees = 90;
     protected char facingDirection = 'N';
     protected List<History> history = new ArrayList<>();
@@ -45,11 +48,6 @@ public abstract class AbstractVehicle implements Vehicle {
         return false;
     }
 
-    @Override
-    public char getFacingDirection() {
-
-        return facingDirection;
-    }
 
     @Override
     public Point getLocation() {
@@ -58,27 +56,22 @@ public abstract class AbstractVehicle implements Vehicle {
 
     @Override
     public String getCoordinates() {
-        return getLocation().x + " " + getLocation().y + " " + getFacingDirection();
+        return getLocation().x + " " + getLocation().y + " " + Navigable.toCoord(degrees);
     }
 
     @Override
     public int getDegrees() {
-        return 0;
+        return degrees;
     }
 
     @Override
     public void setDegrees(int degrees) {
-
+        this.degrees = degrees;
     }
 
     @Override
     public List<History> getHistory() {
         return history;
-    }
-
-    @Override
-    public void setFacingDirection(char facingDirection) {
-        this.facingDirection = facingDirection;
     }
 
     @Override

@@ -5,10 +5,12 @@ import java.awt.*;
 /**
  * @author Shurel Reynolds.
  */
+
+
 public abstract class AbstractLever implements Lever {
 
     protected int degrees=90;
-    protected char facingDirection;
+
 
     @Override
     public boolean move(int x, int y) {
@@ -21,11 +23,6 @@ public abstract class AbstractLever implements Lever {
     @Override
     public Point getLocation() {
         return null;
-    }
-
-    @Override
-    public char getFacingDirection() {
-        return ' ';
     }
     @Override
     public String getInitial() {
@@ -43,13 +40,9 @@ this.degrees=degrees;
 
     @Override
     public String getCoordinates() {
-        return getLocation().x+" "+getLocation().y+" "+getFacingDirection();
+        return getLocation().x+" "+getLocation().y+" "+Navigable.toCoord(degrees);
     }
 
-    @Override
-    public void setFacingDirection(char facingDirection) {
-        this.facingDirection = facingDirection;
-    }
 
 
 }

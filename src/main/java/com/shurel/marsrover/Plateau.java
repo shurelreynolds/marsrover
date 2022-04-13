@@ -33,16 +33,17 @@ public class Plateau {
         this.gridXSize = gridXSize;
         this.gridYSize = gridYSize;
     }
+
     //add navigable object to plateau
-    public void addNavigable(Navigable navigable){
+    public void addNavigable(Navigable navigable) {
         navigableList.add(navigable);
     }
 
-    public Navigable getNavigable(String name) throws NavigatorCommandException{
-     Navigable navigable =
-       navigableList.stream().filter(n->n.getName().equals(name)).findFirst().get();
-    if(navigable==null)throw new NavigatorCommandException(name +" not found");
-    return navigable;
+    public Navigable getNavigable(String name) throws NavigatorCommandException {
+        Navigable navigable =
+                navigableList.stream().filter(n -> n.getName().equals(name)).findFirst().get();
+        if (navigable == null) throw new NavigatorCommandException(name + " not found");
+        return navigable;
     }
 
     public int getGridYSize() {
@@ -51,5 +52,9 @@ public class Plateau {
 
     public int getGridXSize() {
         return this.gridXSize;
+    }
+
+    public Dimension getDimension() {
+        return new Dimension(gridXSize,gridYSize);
     }
 }

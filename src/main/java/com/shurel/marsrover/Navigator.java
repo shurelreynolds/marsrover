@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Navigator {
+
     /*
      * Sets a maximum for the gridCount
      * The user cannot create a plateau with a greater grid count
@@ -19,11 +20,6 @@ public class Navigator {
      * */
     public final static int MIN_GRID_COUNT = 5;
 
-
-    private static void position(Navigable navigable, int x, int y) {
-        navigable.setPoint(x, y);
-    }
-
     /*
      * The Planet to navigate
      * */
@@ -32,7 +28,7 @@ public class Navigator {
     /*
      * for plotting out coords
      * */
-    private String[][] grid;
+    private final String[][] grid;
 
     /*
      * creates a constructor with the default minimum grid size
@@ -55,7 +51,7 @@ public class Navigator {
         if (gridXSize > MAX_GRID_COUNT || gridYSize > MAX_GRID_COUNT)
             throw new NavigatorException("Maximum Grid Size: " + MAX_GRID_COUNT);
 
-        if (gridXSize < MIN_GRID_COUNT || gridYSize < MIN_GRID_COUNT)
+        if (gridXSize < MIN_GRID_COUNT || gridYSize > MAX_GRID_COUNT)
             throw new NavigatorException("Minimum Grid Size: " + MIN_GRID_COUNT);
         planet = new Mars(new Plateau(gridXSize, gridYSize));
         grid = new String[gridXSize][gridYSize];
@@ -90,7 +86,7 @@ public class Navigator {
     }
 
     public void move(String navigable, int x, int y) throws NavigatorCommandException {
-        // planet.getPlateau().getNavigable(navigable).move(x, y);
+
         move(navigable, x + " " + y + " N");
     }
 
@@ -102,19 +98,121 @@ public class Navigator {
         return planet.getPlateau().getNavigable(navigatable).getCoordinates();
     }
 
-    public void parseCommand(String input) throws NavigatorCommandException {
-        if (input == null) new NavigatorCommandException("Input is null");
+    Point parseLocation(Navigable navigable, String command) {
+        Point currentLocation = navigable.getLocation();
+        int degrees = navigable.getDegrees();
+
+        int x = currentLocation.x;
+        int y = currentLocation.y;
+        char current = ' ';
+        int deg = degrees;
+        //LMLMLMLMM
+        for (int i = 0; i < command.length(); i++) {
+            current = command.charAt(i);
+
+            switch (current) {
+                case 'L':
+                    deg = deg == 0 ? 270 : deg - 90;
+                    break;
+                case 'R':
+                    deg = deg == 270 ? 0 : deg + 90;
+                    break;
+
+                case 'M':
+
+                    switch (deg) {
+                        //west
+                        case 0:
+                            x--;
+                            break;
+
+                        //north
+                        case 90:
+                            y++;
+                            break;
+                        //east
+                        case 180:
+                            x++;
+                            break;
+                        //south
+                        case 270:
+                            y--;
+                            break;
+                    }
+
+
+            }
+
+
+        }
+
+        navigable.setDegrees(deg);
+
+        if (x < 0)
+            x += planet.getPlateau().getGridXSize();
+        if (y < 0)
+            y += planet.getPlateau().getGridYSize();
+
+
+        return new Point(x, y);
+    }
+
+    private void updateLocation(Navigable navigable, Point newLocation) {
+        Point oldLocation = navigable.getLocation();
+        grid[(planet.getPlateau().getGridYSize() - 1) - oldLocation.y][oldLocation.x] = " . ";
+
+        navigable.setPoint(newLocation.x, newLocation.y);
+
+        // places new position on grid
+        grid[(planet.getPlateau().getGridYSize() - 1) - newLocation.y][newLocation.x] = navigable.getInitial() + " ";
+
+    }
+
+    //TODO: replace with enum
+    private int charToDegrees(char direction) {
+        switch (direction) {
+            case 'E':
+                return 180;
+            case 'W':
+                return 0;
+            case 'N':
+                return 90;
+            case 'S':
+                return 270;
+            default:
+                return -1;
+        }
+    }
+
+    public static boolean isValidCommand(String command) throws NavigatorCommandException {
+
+        if (command == null) throw new NavigatorCommandException("Command is null");
+
+        if (!command.toUpperCase().matches("[LMR]+") && !command.toUpperCase().matches("\\d+ \\d+ [NEWS]"))
+            throw new NavigatorCommandException("Invalid Format");
+        return true;
     }
 
     public void move(String navigable, String command) throws NavigatorCommandException {
-        //find navigable first
-        if (navigable == null) new NavigatorCommandException("Navigable is null");
-        Navigable nav = planet.getPlateau().getNavigable(navigable);
+       if (navigable == null) new NavigatorCommandException("Navigable is null");
 
-        if (command.matches("\\-?\\d+ \\-?\\d+ [NEWS]")) {
+        if (!isValidCommand(command)) new NavigatorCommandException("Invalid Command");
+
+
+        int x, y;
+
+        Navigable nav = planet.getPlateau().getNavigable(navigable);
+        Point location = nav.getLocation();
+
+        if (command.matches("[LMR]+")) {
+            updateLocation(nav, parseLocation(nav, command));
+        } else if (command.matches("\\-?\\d+ \\-?\\d+ [NEWS]")) {
+
             String s[] = command.split(" ");
-            int x = Integer.parseInt(s[0]);
-            int y = Integer.parseInt(s[1]);
+            x = Integer.parseInt(s[0]);
+            y = Integer.parseInt(s[1]);
+            char d = command.charAt(command.length() - 1);
+            //
 
             if (x >= planet.getPlateau().getGridXSize())
                 throw new NavigatorCommandException("x is out of bounds");
@@ -136,21 +234,20 @@ public class Navigator {
 
             char dir = command.charAt(command.length() - 1);
 
+            nav.setDegrees(charToDegrees(dir));
 
             //remove from grid
-            Point location = nav.getLocation();
-
-
             grid[(planet.getPlateau().getGridYSize() - 1) - location.y][location.x] = " . ";
 
             nav.setPoint(x, y);
-            nav.setFacingDirection(dir);
 
             // places new position on grid
             location = nav.getLocation();
             grid[(planet.getPlateau().getGridYSize() - 1) - location.y][location.x] = nav.getInitial() + " ";
 
         }
+
+
     }
 
     public Navigable find(String navigable) throws NavigatorCommandException {
@@ -160,4 +257,6 @@ public class Navigator {
     public Planet getPlanet() {
         return this.planet;
     }
+
+
 }
