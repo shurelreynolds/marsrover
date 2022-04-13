@@ -2,6 +2,7 @@
 MarsRover is a simulation game about navigating space vehicles, avoiding obstacles and controlling equipments on Mars.
 
 Assumption
+- That  upper-right coordinates 5,5 implies a grid size of 6 units     
 - That N = 90 degrees, E = 180 degrees, W = 0/360 degrees S = 270 degrees
 - That there is a Rover at point 0,0 at the start, facing North.
 - On Move R2(x=R(-1).x,R(-1).y)
