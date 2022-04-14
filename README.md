@@ -23,4 +23,4 @@ Aspects to be tested
 - 
 Command Line Interface
 
-![Step 1](/repository/assets/mars1.png?raw=true "Step 1")
+![Step 1](/repository/mars1.png?raw=true "Step 1")
