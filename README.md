@@ -22,4 +22,5 @@ Aspects to be tested
 - Rover coords
 - 
 Command Line Interface
-![Step 1](https://github.com/[shurelreynolds]/[marsrover]/blob/[main]/mars1.png?raw=true)
+
+![Step 1](https://github.com/shurelreynolds/marsrover/blob/main/mars1.png?raw=true)
