@@ -20,3 +20,6 @@ Aspects to be tested
 - Valid & invalid commands
 - Navigation Map
 - Rover coords
+- 
+Command Line Interface
+![Step 1](https://github.com/[shurelreynolds]/[marsrover]/blob/[main]/mars1.png?raw=true)
