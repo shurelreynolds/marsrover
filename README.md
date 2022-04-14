@@ -23,4 +23,4 @@ Aspects to be tested
 - 
 Command Line Interface
 
-![Step 1](https://github.com/shurelreynolds/marsrover/blob/main/mars1.png)
+![Step 1](/repository/assets/mars1.png?raw=true "Step 1")
