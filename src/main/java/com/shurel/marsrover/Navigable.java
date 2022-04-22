@@ -1,5 +1,7 @@
 package com.shurel.marsrover;
 
+import com.shurel.marsrover.planet.plateau.Plateau;
+
 import java.awt.*;
 
 /**
@@ -16,8 +18,10 @@ public interface Navigable{
     String getInitial();
     boolean rotate(char dir);
     Point getLocation();
-    String getCoordinates();
-    void setPoint(int x, int y);
+    void setLocation(int x, int y);
+    Point getUnrealPosition();
+     String getCoordinates();
+
 
     static char toCoord(int degree){
         switch(degree){
@@ -33,7 +37,8 @@ public interface Navigable{
         }
         return ' ';
     }
-
+    Plateau getPlateau();
+    void setPlateau(Plateau plateau);
 }
 
 

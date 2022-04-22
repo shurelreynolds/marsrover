@@ -1,6 +1,7 @@
 package com.shurel.marsrover.planet;
 
 import com.shurel.marsrover.planet.plateau.Plateau;
+import com.shurel.marsrover.util.MarsRoverAppUtil;
 
 /**
  * @author Shurel Reynolds.
@@ -8,10 +9,16 @@ import com.shurel.marsrover.planet.plateau.Plateau;
 public class Earth extends AbstractPlanet {
     protected Earth(Plateau plateau) {
         super(plateau);
+        setName(MarsRoverAppUtil.getWord("earth"));
     }
 
     @Override
     public Plateau getPlateau() {
-        return null;
+        return plateau;
+    }
+
+    @Override
+    public int getHoursInADay() {
+        return 24;
     }
 }

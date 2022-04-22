@@ -95,7 +95,7 @@ public class MarsRoverTest {
                     " .  .  .  .  . \n" +
                     " .  .  .  .  . \n";
 
-            assertEquals(expected, navigator.getTextMap());
+            assertEquals(expected, navigator.getPlanet().getPlateau().getMap());
 
         } catch (NavigatorCommandException | NavigatorException e) {
             e.printStackTrace();
@@ -104,29 +104,7 @@ public class MarsRoverTest {
     }
 
 
-    @Test
-    public void testMoveNegativeNumbersRover() {
-        try {
-            navigator = new Navigator();
-            navigator.move("Rover 1", "-1 -1 N");
-            Navigable rover = navigator.find("Rover 1");
 
-            assertEquals(new Point(4, 4), rover.getLocation());
-
-            String expected =
-                    " .  .  .  . R1 \n" +
-                            " .  .  .  .  . \n" +
-                            " .  .  .  .  . \n" +
-                            " .  .  .  .  . \n" +
-                            " .  .  .  .  . \n";
-
-            assertEquals(expected, navigator.getTextMap());
-
-        } catch (NavigatorCommandException | NavigatorException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
     @Test
@@ -206,7 +184,7 @@ public class MarsRoverTest {
            // navigator.move("Rover 1","L");
            // navigator.move("Rover 1","L");
            // navigator.move("Rover 1","L");
-            // assertEquals("3 3 E",rover.getCoordinates());
+             assertEquals("4 2 W",rover.getCoordinates());
            // assertEquals("3 3 E",rover.getCoordinates());
 
 

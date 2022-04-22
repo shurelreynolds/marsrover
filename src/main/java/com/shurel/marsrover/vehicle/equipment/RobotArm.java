@@ -1,5 +1,6 @@
 package com.shurel.marsrover.vehicle.equipment;
 
+import com.shurel.marsrover.planet.plateau.Plateau;
 import com.shurel.marsrover.sample.Sample;
 
 import java.awt.*;
@@ -18,7 +19,17 @@ public class RobotArm extends AbstractLever {
     }
 
     @Override
-    public void setPoint(int x, int y) {
+    public void setLocation(int x, int y) {
+
+    }
+
+    @Override
+    public Plateau getPlateau() {
+        return null;
+    }
+
+    @Override
+    public void setPlateau(Plateau plateau) {
 
     }
 

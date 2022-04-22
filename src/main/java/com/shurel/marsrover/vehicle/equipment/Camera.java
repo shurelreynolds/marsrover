@@ -1,6 +1,7 @@
 package com.shurel.marsrover.vehicle.equipment;
 
 import com.shurel.marsrover.Navigable;
+import com.shurel.marsrover.planet.plateau.Plateau;
 
 import java.awt.*;
 
@@ -44,7 +45,23 @@ public class Camera extends AbstractEquipment implements Navigable {
     }
 
     @Override
-    public void setPoint(int x, int y) {
+    public Plateau getPlateau() {
+        return null;
     }
+
+    @Override
+    public void setPlateau(Plateau plateau) {
+
+    }
+
+    @Override
+    public void setLocation(int x, int y) {
+    }
+
+    @Override
+    public Point getUnrealPosition() {
+        return null;
+    }
+
 
 }

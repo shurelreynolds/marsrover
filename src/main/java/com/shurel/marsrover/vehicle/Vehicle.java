@@ -1,7 +1,8 @@
 package com.shurel.marsrover.vehicle;
 
-import com.shurel.marsrover.History;
 import com.shurel.marsrover.Navigable;
+import com.shurel.marsrover.model.History;
+import com.shurel.marsrover.planet.plateau.Plateau;
 import com.shurel.marsrover.vehicle.equipment.Camera;
 
 import java.awt.*;
@@ -15,5 +16,7 @@ public interface Vehicle extends Navigable {
     Camera getCamera();
     Point getLocation();
     List<History> getHistory();
+    Plateau getPlateau();
+    void setPlateau(Plateau plateau);
 
 }

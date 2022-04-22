@@ -11,25 +11,29 @@ import java.awt.*;
 
 public abstract class AbstractLever implements Lever {
 
-    protected int degrees=90;
-
+    protected int degrees = 90;
+    protected Point unrealLocation;
 
     @Override
     public boolean move(int x, int y) {
         return false;
     }
+
     @Override
     public boolean rotate(char dir) {
         return false;
     }
+
     @Override
     public Point getLocation() {
         return null;
     }
+
     @Override
     public String getInitial() {
         return getName().charAt(0) + "" + getName().charAt(getName().length() - 1);
     }
+
     @Override
     public int getDegrees() {
         return degrees;
@@ -37,14 +41,19 @@ public abstract class AbstractLever implements Lever {
 
     @Override
     public void setDegrees(int degrees) {
-this.degrees=degrees;
+        this.degrees = degrees;
     }
 
     @Override
     public String getCoordinates() {
-        return getLocation().x+" "+getLocation().y+" "+ Navigable.toCoord(degrees);
+        return getLocation().x + " " + getLocation().y + " " + Navigable.toCoord(degrees);
     }
 
+    @Override
+    public Point getUnrealPosition() {
+//todo:
+        return null;
+    }
 
 
 }

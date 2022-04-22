@@ -9,4 +9,5 @@ public interface Planet {
     void setName(String name);
     String getName();
     Plateau getPlateau();
+    int getHoursInADay();
 }

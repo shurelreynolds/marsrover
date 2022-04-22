@@ -6,9 +6,10 @@ package com.shurel.marsrover;
 import com.shurel.marsrover.planet.Mars;
 import com.shurel.marsrover.planet.Planet;
 import com.shurel.marsrover.planet.plateau.Plateau;
+import com.shurel.marsrover.util.LogMessage;
+import com.shurel.marsrover.util.MarsRoverAppUtil;
 
 import java.awt.*;
-import java.util.Arrays;
 
 public class Navigator {
 
@@ -29,12 +30,7 @@ public class Navigator {
      * */
     private final Planet planet;
 
-    /*
-     * for plotting out coords
-     * */
-    private final String[][] grid;
-
-    /*
+     /*
      * creates a constructor with the default minimum grid size
      * */
     public Navigator() throws NavigatorException, NavigatorCommandException {
@@ -55,18 +51,15 @@ public class Navigator {
         if (gridXSize > MAX_GRID_COUNT || gridYSize > MAX_GRID_COUNT)
             throw new NavigatorException("Maximum Grid Size: " + MAX_GRID_COUNT);
 
-        if (gridXSize < MIN_GRID_COUNT || gridYSize > MAX_GRID_COUNT)
+        if (gridXSize < MIN_GRID_COUNT || gridYSize < MIN_GRID_COUNT)
             throw new NavigatorException("Minimum Grid Size: " + MIN_GRID_COUNT);
         planet = new Mars(new Plateau(gridXSize, gridYSize));
-        grid = new String[gridXSize][gridYSize];
-        //fill the grid
-        for (String i[] : grid) {
-            // Fill each row with -.
-            Arrays.fill(i, " . ");
-        }
+
+//
+
         //position the first rover on grid
         Navigable rover = planet.getPlateau().getNavigable("Rover 1");
-        grid[(gridYSize - 1) - rover.getLocation().y][rover.getLocation().x] = " " + rover.getInitial();
+        //  grid[(gridYSize - 1) - rover.getLocation().y][rover.getLocation().x] = " " + rover.getInitial();
     }
 
     /*
@@ -75,21 +68,11 @@ public class Navigator {
     public String getTextMap() {
 // map out
 
-
-        String out = "";
-        for (String i[] : grid) {
-            for (String j : i) {
-                out += j;
-            }
-            out += "\n";
-
-        }
-
-
-        return out;
+        return planet.getPlateau().getMap();
     }
 
     public void move(String navigable, int x, int y) throws NavigatorCommandException {
+        MarsRoverAppUtil.log(new LogMessage(navigable + " " + MarsRoverAppUtil.getWord("move") + " " + x + " " + y));
 
         move(navigable, x + " " + y + " N");
     }
@@ -98,8 +81,9 @@ public class Navigator {
         System.out.println(getTextMap());
     }
 
-    public String getCoordinates(String navigatable) throws NavigatorCommandException {
-        return planet.getPlateau().getNavigable(navigatable).getCoordinates();
+    public String getCoordinates(String navigable) throws NavigatorCommandException {
+        MarsRoverAppUtil.log(new LogMessage("getCoordinates: " + navigable));
+        return planet.getPlateau().getNavigable(navigable).getCoordinates();
     }
 
     Point parseLocation(Navigable navigable, char command) {
@@ -110,52 +94,50 @@ public class Navigator {
         int y = currentLocation.y;
         char current = ' ';
         int deg = degrees;
-        //System.out.println("Current deg: "+deg);
+
         //LMLMLMLMM
 
-            deg=navigable.getDegrees();
+        deg = navigable.getDegrees();
 
-            System.out.println("Command: "+current);
-            switch (command) {
-                case 'L':
 
-                    deg = deg == 0 ? 270 : deg - 90;
-                    navigable.setDegrees(deg);
-                   // System.out.println("update l: "+deg);
-                    break;
-                case 'R':
-                    deg = deg == 270 ? 0 : deg + 90;
-                    navigable.setDegrees(deg);
+        switch (command) {
+            case 'L':
 
-                    break;
+                deg = deg == 0 ? 270 : deg - 90;
+                navigable.setDegrees(deg);
+                break;
+            case 'R':
+                deg = deg == 270 ? 0 : deg + 90;
+                navigable.setDegrees(deg);
 
-                case 'M':
+                break;
 
-                    switch (deg) {
-                        //west
-                        case 0:
-                            x--;
-                            break;
+            case 'M':
 
-                        //north
-                        case 90:
-                            y++;
-                            break;
-                        //east
-                        case 180:
-                            x++;
-                            break;
-                        //south
-                        case 270:
-                            y--;
-                            break;
-                    }
+                switch (deg) {
+                    //west
+                    case 0:
+                        x--;
+                        break;
 
+                    //north
+                    case 90:
+                        y++;
+                        break;
+                    //east
+                    case 180:
+                        x++;
+                        break;
+                    //south
+                    case 270:
+                        y--;
+                        break;
+                }
 
 
         }
 
-         if (x < 0)
+        if (x < 0)
             x += planet.getPlateau().getGridXSize();
         if (y < 0)
             y += planet.getPlateau().getGridYSize();
@@ -166,12 +148,12 @@ public class Navigator {
 
     private void updateLocation(Navigable navigable, Point newLocation) {
         Point oldLocation = navigable.getLocation();
-        grid[(planet.getPlateau().getGridYSize() - 1) - oldLocation.y][oldLocation.x] = " . ";
+        // grid[(planet.getPlateau().getGridYSize() - 1) - oldLocation.y][oldLocation.x] = " . ";
 
-        navigable.setPoint(newLocation.x, newLocation.y);
+        navigable.setLocation(newLocation.x, newLocation.y);
 
         // places new position on grid
-        grid[(planet.getPlateau().getGridYSize() - 1) - newLocation.y][newLocation.x] = navigable.getInitial() + " ";
+        //  grid[(planet.getPlateau().getGridYSize() - 1) - newLocation.y][newLocation.x] = navigable.getInitial() + " ";
 
     }
 
@@ -201,7 +183,10 @@ public class Navigator {
     }
 
     public void move(String navigable, String command) throws NavigatorCommandException {
-       if (navigable == null) new NavigatorCommandException("Navigable is null");
+        MarsRoverAppUtil.log(new LogMessage(navigable + " " + command));
+
+
+        if (navigable == null) new NavigatorCommandException("Navigable is null");
 
         if (!isValidCommand(command)) new NavigatorCommandException("Invalid Command");
 
@@ -237,23 +222,19 @@ public class Navigator {
                 throw new NavigatorCommandException("y is out of bounds");
 
             if (x < 0)
-                x += planet.getPlateau().getGridXSize();
+                x += planet.getPlateau().getGridXSize() - 1;
             if (y < 0)
-                y += planet.getPlateau().getGridYSize();
+                y += planet.getPlateau().getGridYSize() - 1;
 
 
             char dir = command.charAt(command.length() - 1);
 
             nav.setDegrees(charToDegrees(dir));
 
-            //remove from grid
-            grid[(planet.getPlateau().getGridYSize() - 1) - location.y][location.x] = " . ";
-
-            nav.setPoint(x, y);
+            nav.setLocation(x, y);
 
             // places new position on grid
             location = nav.getLocation();
-            grid[(planet.getPlateau().getGridYSize() - 1) - location.y][location.x] = nav.getInitial() + " ";
 
         }
 
